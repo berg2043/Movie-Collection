@@ -1,5 +1,11 @@
 # Movie-Collection
 
+Open terminal in this folder and run `psql database-name < database.sql` to import the data. 
+(`psql -f database.sql database-name` in powershell for windows users).  `database-name`
+will need to be an existing database in which you have `CREATE DATABSE` privlages 
+to have psql create the database for you, or you can create a database named 
+`movie_collection` and replace `database-name` with that.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
