@@ -16,8 +16,7 @@ CREATE TABLE movies
   "name" VARCHAR(50) NOT NULL,
   "description" VARCHAR(8000),
   "release" DATE,
-  "start-time" TIME,
-  "end-time" TIME,
+  "run-time" TIME,
   "votes" INT
 );
 
