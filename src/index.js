@@ -10,15 +10,22 @@ import { takeEvery } from 'redux-saga/effects'
 import logger from 'redux-logger';
 // Reducers
 import movieList from './reducers/movieList';
+import genreList from './reducers/genreList';
 // Sagas
 import getMovies from './sagas/getMovies';
 import postMovie from './sagas/postMovie';
 import deleteMovie from './sagas/deleteMovie';
+import getGenres from './sagas/getGenres';
+import postGenre from './sagas/postGenre';
+import deleteGenre from './sagas/deleteGenre';
 
 function* rootSaga(){
   yield takeEvery('GET_MOVIES', getMovies);
   yield takeEvery('POST_MOVIE', postMovie);
   yield takeEvery('DELETE_MOVIE', deleteMovie)
+  yield takeEvery('GET_GENRES', getGenres);
+  yield takeEvery('POST_GENRE', postGenre);
+  yield takeEvery('DELETE_GENRE', deleteGenre)
 }
 
 // Create sagamiddleware
@@ -27,7 +34,8 @@ const sagaMiddleware = createSagaMiddleware();
 // Creates redux store
 const storeInstance = createStore(
   combineReducers({
-    movieList
+    movieList,
+    genreList
   }), applyMiddleware(logger, sagaMiddleware)
 );
 
