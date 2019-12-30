@@ -10,14 +10,15 @@ import { takeEvery } from 'redux-saga/effects'
 import logger from 'redux-logger';
 // Reducers
 import movieList from './reducers/movieList';
-
 // Sagas
 import getMovies from './sagas/getMovies';
 import postMovie from './sagas/postMovie';
+import deleteMovie from './sagas/deleteMovie';
 
 function* rootSaga(){
   yield takeEvery('GET_MOVIES', getMovies);
   yield takeEvery('POST_MOVIE', postMovie);
+  yield takeEvery('DELETE_MOVIE', deleteMovie)
 }
 
 // Create sagamiddleware
