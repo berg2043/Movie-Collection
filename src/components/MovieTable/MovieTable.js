@@ -20,7 +20,7 @@ function MovieTable(){
           <tr>
             <th>Title</th>
             <th>Release Date</th>
-            <th>Rune Time</th>
+            <th>Run Time</th>
             <th></th>
           </tr>
         </thead>
