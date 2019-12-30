@@ -11,6 +11,7 @@ function HTMLForm(){
   // Dispatch set up
   const dispatch = useDispatch();
 
+  // Sends form to server then to DB
   function submit(event){
     event.preventDefault();
     dispatch({
