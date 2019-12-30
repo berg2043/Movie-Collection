@@ -1,10 +1,12 @@
 import React from "react";
-import HTMLForm from "../MovieForm/MovieForm";
+import MovieForm from "../MovieForm/MovieForm";
+import MovieTable from "../MovieTable/MovieTable";
 
 function MoviePage(){
   return(
     <div>
-      <HTMLForm />
+      <MovieForm />
+      <MovieTable />
     </div>
   );
 }
