@@ -1,17 +1,12 @@
 import React from "react";
+import HTMLForm from "../HTMLForm/HTMLForm";
 
-function HTMLForm(){
+function HTMLPage(){
   return(
     <div>
-      <form>
-        <input/>
-        <input/>
-        <input/>
-        <input/>
-        <button>Submit</button>
-      </form>
+      <HTMLForm />
     </div>
-  )
-}
+  );
+};
 
-export default HTMLForm;
+export default HTMLPage;
