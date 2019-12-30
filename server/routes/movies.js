@@ -15,7 +15,7 @@ router.get('/', (req,res)=>{
 
 // POST
 router.post('/', (req,res)=>{
-  const queryText = `INSERT INTO "movies"("name", "release", "run-time") VALUES($1,$2,$3)`
+  const queryText = `INSERT INTO "movies"("name", "release", "run_time") VALUES($1,$2,$3)`
   pool.query(queryText, [req.body.name, req.body.date, req.body.time]).then(result=>{
     res.sendStatus(201);
   }).catch(err=>{
