@@ -7,6 +7,6 @@ function MoviePage(){
       <HTMLForm />
     </div>
   );
-};
+}
 
 export default MoviePage;

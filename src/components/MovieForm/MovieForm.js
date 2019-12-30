@@ -54,6 +54,6 @@ function HTMLForm(){
       <button>Submit</button>
     </form>
   );
-};
+}
 
 export default HTMLForm;
