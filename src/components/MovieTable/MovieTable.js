@@ -21,6 +21,7 @@ function MovieTable(){
             <th>Title</th>
             <th>Release Date</th>
             <th>Rune Time</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,13 @@ function MovieTable(){
                 <td>{movie.name}</td>
                 <td>{new Date(movie.release).toLocaleDateString()}</td>
                 <td>{movie.run_time.split(':')[0]+':'+movie.run_time.split(':')[1]}</td>
+                <td>
+                  <button 
+                    onClick={(event)=>{dispatch({type: 'DELETE_MOVIE', payload: movie.id})}}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}
