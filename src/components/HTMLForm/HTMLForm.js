@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useDispatch} from 'react-redux';
 
 function HTMLForm(){
   // States
@@ -7,9 +8,20 @@ function HTMLForm(){
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
+  // Dispatch set up
+  const dispatch = useDispatch();
+
   function submit(event){
     event.preventDefault();
-    console.log(name, genre, date,time);
+    dispatch({
+      type: 'POST_MOVIE',
+      payload: {
+        name: name,
+        genre: genre,
+        date: date,
+        time: time
+      }
+    })
   }
 
   return(
