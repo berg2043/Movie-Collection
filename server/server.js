@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('build'));
 
 // Routes
-app.use('api/movies', movies)
+app.use('/api/movies', movies)
 
 // Start Server
 app.listen(port, function () {
