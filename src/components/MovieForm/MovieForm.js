@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import {useDispatch} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
-function HTMLForm(){
+function MovieForm(){
   // States
   const [name, setName] = useState('');
   const [genre, setGenre] = useState('');
@@ -10,6 +10,14 @@ function HTMLForm(){
 
   // Dispatch set up
   const dispatch = useDispatch();
+
+  // Gets all the genres on load
+  useEffect(()=>{
+    dispatch({type: 'GET_GENRES'})
+  }, [dispatch]);  
+
+  // Gains access to genres
+  const genres = useSelector(state=>state.genreList);
 
   // Sends form to server then to DB
   function submit(event){
@@ -37,7 +45,13 @@ function HTMLForm(){
         onChange={(event)=>{setGenre(event.target.value)}}
         value={genre}
         placeholder='Genre'
-      />
+      >
+        {genres.map(genre=>{
+          return(
+            <option value={genre.project}>{genre.project}</option>
+          )
+        })}
+      </select>
       <input
         type='date'
         onChange={(event)=>{setDate(event.target.value)}}
@@ -57,4 +71,4 @@ function HTMLForm(){
   );
 }
 
-export default HTMLForm;
+export default MovieForm;
