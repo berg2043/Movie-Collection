@@ -12,12 +12,12 @@ DROP TABLE IF EXISTS movies;
 -- Create the table in the specified schema
 CREATE TABLE movies
 (
-  ID INT NOT NULL PRIMARY KEY, -- primary key column
+  ID SERIAL PRIMARY KEY, -- primary key column
   "name" VARCHAR(50) NOT NULL,
   "description" VARCHAR(8000),
   "release" DATE,
   "run-time" TIME,
-  "votes" INT
+  "votes" INT DEFAULT 0
 );
 
 -- Create a new table called 'genres'
@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS genres;
 -- Create the table in the specified schema
 CREATE TABLE genres
 (
-  ID INT NOT NULL PRIMARY KEY, -- primary key column
+  ID SERIAL PRIMARY KEY, -- primary key column
   "project" VARCHAR(50) NOT NULL
   -- specify more columns here
 );
