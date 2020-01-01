@@ -1,7 +1,40 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Card, CardContent, CardActions, Button, CardHeader } from '@material-ui/core/';
+
+// Material-ui styling
+const useStyles = makeStyles(theme => ({
+  card: {
+      minWidth: 275,
+      backgroundColor: '#c63901',
+      color: '#cbd4c2',
+  },
+  pos: {
+      marginBottom: 12,
+      margin: theme.spacing(1),
+      backgroundColor: '#cbd4c2',
+      color: '#50514f',
+  },
+  delete:{
+    margin: "auto",
+    marginTop: 0,
+    backgroundColor: '#50514f',
+    color: '#cbd4c2',
+  },
+  formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+  },
+  selectEmpty: {
+      marginTop: theme.spacing(2),
+  }
+}))
 
 function MovieTable(){
+  // Adds material-ui styling
+  const classes = useStyles();
+
   // Dispatch set up
   const dispatch = useDispatch();
 
@@ -20,42 +53,50 @@ function MovieTable(){
     }})
   }
   return(
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Run Time</th>
-            <th>Votes</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {movies.map(movie=>{
+    <Grid container spacing={3}>
+      {movies.map(movie=>{
             return(
-              <tr key={movie.id}>
-                <td>{movie.name}</td>
-                <td>{new Date(movie.release).toLocaleDateString()}</td>
-                <td>{movie.run_time.split(':')[0]+':'+movie.run_time.split(':')[1]}</td>
-                <td>
-                  <button onClick={(event)=>{votes(movie.id, 1)}}>&uarr;</button>
-                  {movie.votes}
-                  <button onClick={(event)=>{votes(movie.id, -1)}}>&darr;</button>
-                </td>
-                <td>
-                  <button 
-                    onClick={(event)=>{dispatch({type: 'DELETE_MOVIE', payload: movie.id})}}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
+              <Grid item key={movie.id}>
+                <Card className={classes.card}>
+                  <CardHeader title={movie.name}/>
+                  <CardContent>
+                    Date Released: {new Date(movie.release).toLocaleDateString()}
+                    <br/>
+                    Movie Run Time: {movie.run_time.split(':')[0]+':'+movie.run_time.split(':')[1]}
+                  </CardContent>
+                  
+                  <CardActions>
+                    <h5>Votes: {movie.votes}</h5>
+                    <Button 
+                      variant="contained"
+                      className={classes.pos}
+                      onClick={(event)=>{votes(movie.id, 1)}}
+                    >
+                      &uarr;
+                    </Button>
+                    <Button 
+                      variant="contained"
+                      className={classes.pos}
+                      onClick={(event)=>{votes(movie.id, -1)}}
+                    >
+                      &darr;
+                    </Button>
+                  </CardActions>
+                  <CardActions>
+                    <Button 
+                      variant="contained"
+                      color="secondary"
+                      className={classes.pos + ' ' + classes.delete}
+                      onClick={(event)=>{dispatch({type: 'DELETE_MOVIE', payload: movie.id})}}
+                    >
+                      Delete
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
             );
           })}
-        </tbody>
-      </table>
-    </div>
+    </Grid>
   );
 }
 
