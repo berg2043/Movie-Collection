@@ -13,6 +13,12 @@ function MovieTable(){
   // Gains access to movies reducer
   const movies = useSelector(state=>state.movieList);
 
+  function votes(id, dirrection){
+    dispatch({type: 'VOTE', payload: {
+      id,
+      dirrection
+    }})
+  }
   return(
     <div>
       <table>
@@ -21,6 +27,7 @@ function MovieTable(){
             <th>Title</th>
             <th>Release Date</th>
             <th>Run Time</th>
+            <th>Votes</th>
             <th></th>
           </tr>
         </thead>
@@ -31,6 +38,11 @@ function MovieTable(){
                 <td>{movie.name}</td>
                 <td>{new Date(movie.release).toLocaleDateString()}</td>
                 <td>{movie.run_time.split(':')[0]+':'+movie.run_time.split(':')[1]}</td>
+                <td>
+                  <button onClick={(event)=>{votes(movie.id, 1)}}>&uarr;</button>
+                  {movie.votes}
+                  <button onClick={(event)=>{votes(movie.id, -1)}}>&darr;</button>
+                </td>
                 <td>
                   <button 
                     onClick={(event)=>{dispatch({type: 'DELETE_MOVIE', payload: movie.id})}}
