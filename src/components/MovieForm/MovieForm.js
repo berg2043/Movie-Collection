@@ -48,7 +48,7 @@ function MovieForm(){
       >
         {genres.map(genre=>{
           return(
-            <option value={genre.project}>{genre.project}</option>
+            <option key={genre.id} value={genre.project}>{genre.project}</option>
           )
         })}
       </select>
