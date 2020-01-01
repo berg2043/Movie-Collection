@@ -15,6 +15,7 @@ import genreList from './reducers/genreList';
 import getMovies from './sagas/getMovies';
 import postMovie from './sagas/postMovie';
 import deleteMovie from './sagas/deleteMovie';
+import votMovie from './sagas/voteMovie'
 import getGenres from './sagas/getGenres';
 import postGenre from './sagas/postGenre';
 import deleteGenre from './sagas/deleteGenre';
@@ -22,7 +23,8 @@ import deleteGenre from './sagas/deleteGenre';
 function* rootSaga(){
   yield takeEvery('GET_MOVIES', getMovies);
   yield takeEvery('POST_MOVIE', postMovie);
-  yield takeEvery('DELETE_MOVIE', deleteMovie)
+  yield takeEvery('DELETE_MOVIE', deleteMovie);
+  yield takeEvery('VOTE', votMovie);
   yield takeEvery('GET_GENRES', getGenres);
   yield takeEvery('POST_GENRE', postGenre);
   yield takeEvery('DELETE_GENRE', deleteGenre)
