@@ -28,7 +28,7 @@ function GenreTable(){
             return(
               <tr key={genre.id}>
                 <td>{genre.project}</td>
-                <td></td>
+                <td>{genre.count}</td>
                 <td>
                   <button 
                     onClick={(event)=>{dispatch({type: 'DELETE_GENRE', payload: genre.id})}}
