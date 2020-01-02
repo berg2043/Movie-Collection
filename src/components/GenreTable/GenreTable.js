@@ -1,7 +1,48 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { Table, TableHead, TableRow, TableBody, TableCell, Button } from '@material-ui/core';
+
+
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: '#50514f',
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: '#cbd4c2',
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: '#fffcff'
+    }
+  },
+}))(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+  window: {
+    width: 'max-content',
+    margin: 'auto'
+  },
+  delete:{
+  margin: "auto",
+  marginTop: 0,
+  backgroundColor: '#50514f',
+  color: '#cbd4c2',
+  }
+});
 
 function GenreTable(){
+  const classes = useStyles();
   // Dispatch set up
   const dispatch = useDispatch();
 
@@ -14,33 +55,36 @@ function GenreTable(){
   const genres = useSelector(state=>state.genreList) || [];
 
   return(
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Project</th>
-            <th>Total Movies</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+    <div className={classes.window}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Project</StyledTableCell>
+            <StyledTableCell>Total Movies</StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {genres.map(genre=>{
             return(
-              <tr key={genre.id}>
-                <td>{genre.project}</td>
-                <td>{genre.count}</td>
-                <td>
-                  <button 
+              <StyledTableRow  key={genre.id}>
+                <StyledTableCell >{genre.project}</StyledTableCell >
+                <StyledTableCell >{genre.count}</StyledTableCell >
+                <StyledTableCell >
+                  <Button
                     onClick={(event)=>{dispatch({type: 'DELETE_GENRE', payload: genre.id})}}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.delete}
                   >
                     Delete
-                  </button>
-                </td>
-              </tr>
+                  </Button>
+                </StyledTableCell >
+              </StyledTableRow >
             );
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 }
