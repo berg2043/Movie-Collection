@@ -58,6 +58,8 @@ function MovieTable(){
                 <Card className={classes.card}>
                   <CardHeader title={movie.name}/>
                   <CardContent>
+                    Genre: {movie.project}
+                    <br/>
                     Date Released: {new Date(movie.release).toLocaleDateString()}
                     <br/>
                     Movie Run Time: {movie.run_time.split(':')[0]+':'+movie.run_time.split(':')[1]}
