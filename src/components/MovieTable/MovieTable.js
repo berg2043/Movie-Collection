@@ -22,13 +22,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#50514f',
     color: '#cbd4c2',
   },
-  formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-  },
-  selectEmpty: {
-      marginTop: theme.spacing(2),
-  }
 }))
 
 function MovieTable(){
@@ -53,7 +46,12 @@ function MovieTable(){
     }})
   }
   return(
-    <Grid container spacing={3}>
+    <Grid 
+      container spacing={3} 
+      direction="row"
+      justify="center"
+      alignItems="stretch"
+    >
       {movies.map(movie=>{
             return(
               <Grid item key={movie.id}>
