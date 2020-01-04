@@ -19,10 +19,12 @@ import votMovie from './sagas/voteMovie'
 import getGenres from './sagas/getGenres';
 import postGenre from './sagas/postGenre';
 import deleteGenre from './sagas/deleteGenre';
+import putMovie from './sagas/putMovie';
 
 function* rootSaga(){
   yield takeEvery('GET_MOVIES', getMovies);
   yield takeEvery('POST_MOVIE', postMovie);
+  yield takeEvery('EDIT_MOVIE', putMovie);
   yield takeEvery('DELETE_MOVIE', deleteMovie);
   yield takeEvery('VOTE', votMovie);
   yield takeEvery('GET_GENRES', getGenres);
