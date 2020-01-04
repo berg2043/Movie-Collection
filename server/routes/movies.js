@@ -74,6 +74,44 @@ router.delete('/:id', (req,res)=>{
   });
 });
 
+// PUT (editting)
+router.put('/', async (req,res)=>{
+  // Sets up initial connection
+  const client = await pool.connect();
+  try{
+    const {
+      id,
+      name,
+      project,
+      release,
+      run_time,
+    } = req.body;
+    await client.query('BEGIN');
+    // Inserts movie and gets it's ID
+    await client.query(
+      `UPDATE "movies" SET "name" = $1, "release" = $2, "run_time" = $3 WHERE "id" = $4;`,
+      [name, release, run_time, id]
+    );
+    // Gets the genres ID
+    const getGenreId = await client.query(
+      `SELECT * FROM "genres" WHERE "project" = $1;`,
+      [project]
+    );
+    const genreId = getGenreId.rows[0].id;
+    // Adds both IDs into relational database
+    await client.query(`UPDATE "m_g" SET "g_id" = $2 WHERE "m_id" = $1;`, [id, genreId]);
+    // Commits the inserts if no errors
+    await client.query('COMMIT');
+    res.sendStatus(200);
+  } catch (error) {
+    await client.query('ROLLBACK')
+    console.log('Error PUT /api/movies', error);
+    res.sendStatus(500);
+  } finally {
+    client.release()
+  }
+});
+
 // PUT (voting)
 router.put('/:id', (req,res)=>{
   const queryText = `UPDATE "movies" SET "votes" = "votes" + $1 WHERE "id" = $2;`;
